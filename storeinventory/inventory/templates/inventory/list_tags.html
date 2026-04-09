@@ -1,0 +1,20 @@
+<div class="sidebar-card">
+    <p class="sidebar-title">Категории / теги</p>
+
+    <ul class="tags-list">
+        <li>
+            <a href="{% url 'index' %}" class="{% if not tag_selected %}active{% endif %}">
+                <span>Все товары</span>
+            </a>
+        </li>
+
+        {% for t in tags %}
+            <li>
+                <a href="{{ t.get_absolute_url }}" class="{% if tag_selected == t.slug %}active{% endif %}">
+                    <span>{{ t.tag_name }}</span>
+                    <span class="tag-count">{{ t.total }}</span>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

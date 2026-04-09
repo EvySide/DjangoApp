@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="product-detail-wrapper">
+    <div class="accent-bar"></div>
+
+    <div class="product-wrapper">
+        <div class="product">
+            <div class="image-section">
+                <div class="product-img-box">
+                    <div class="img-placeholder">
+                        {% if inventory_unit.quantity > 20 %}
+                            🎂
+                        {% elif inventory_unit.quantity > 5 %}
+                            🧁
+                        {% else %}
+                            🍪
+                        {% endif %}
+                        <br>
+                        <span style="font-size: 1rem;">{{ inventory_unit.name }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <span class="category-badge">Товар кондитерской</span>
+
+                <h1 class="product-title-large">{{ inventory_unit.name }}</h1>
+
+                <div class="price-block">
+                    <span class="price-large">{{ inventory_unit.price }} ₽</span>
+
+                    {% if inventory_unit.is_available %}
+                        <span class="stock-badge">✅ В наличии: {{ inventory_unit.quantity }} шт</span>
+                    {% else %}
+                        <span class="stock-badge">❌ Нет в наличии</span>
+                    {% endif %}
+                </div>
+
+                <p class="short-desc">
+                    {% if inventory_unit.description %}
+                        {{ inventory_unit.description }}
+                    {% else %}
+                        Для этого товара описание пока не добавлено.
+                    {% endif %}
+                </p>
+
+                <div class="specs">
+                    <div class="spec-item">
+                        <span class="spec-label">Slug:</span>
+                        <span class="spec-value">{{ inventory_unit.slug }}</span>
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <a href="{% url 'index' %}" class="btn-secondary">← Назад в каталог</a>
+                </div>
+            </div>
+        </div>
+
+        {% with product_tags=inventory_unit.tags.all %}
+            {% if product_tags %}
+                <div class="description">
+                    <h2>Теги товара</h2>
+                    <div class="ingredients">
+                        <ul>
+                            {% for tag in product_tags %}
+                                <li>
+                                    <a href="{{ tag.get_absolute_url }}" class="tag-inline-link">{{ tag.tag_name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="page-title">{{ title }}</h1>
+<p class="subhead">Каталог товаров кондитерской</p>
+
+{% if inventory_units %}
+    <div class="products-grid">
+        {% for p in inventory_units %}
+            <div class="product-card">
+                <div class="product-img">
+                    {% if p.quantity > 20 %}
+                        🎂
+                    {% elif p.quantity > 5 %}
+                        🧁
+                    {% else %}
+                        🍪
+                    {% endif %}
+                </div>
+
+                <div class="product-info">
+                    <div class="product-title">{{ p.name }}</div>
+
+                    <div class="product-desc">
+                        {% if p.description %}
+                            {{ p.description|truncatechars:90 }}
+                        {% else %}
+                            Описание для товара пока не добавлено.
+                        {% endif %}
+                    </div>
+
+                    <div class="price-stock">
+                        <span class="price">{{ p.price }} ₽</span>
+
+                        {% if p.is_available %}
+                            <span class="stock {% if p.quantity < 10 %}low{% endif %}">
+                                {% if p.quantity < 10 %}⚠️{% else %}📦{% endif %} {{ p.quantity }} шт
+                            </span>
+                        {% else %}
+                            <span class="stock low">Нет в наличии</span>
+                        {% endif %}
+                    </div>
+
+                    <a href="{{ p.get_absolute_url }}" class="btn-detail">Подробнее →</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="empty-state">
+        <h2>Товары не найдены</h2>
+        <p>По выбранному тегу пока нет записей.</p>
+    </div>
+{% endif %}
+{% endblock %}
