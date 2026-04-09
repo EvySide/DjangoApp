@@ -19,6 +19,7 @@ pip install -r requirements.txt
 
 ### 4. Примените миграции db
 ```
+cd storeinventory\
 python manage.py migrate
 ```
 
