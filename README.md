@@ -2,7 +2,7 @@
 
 ### 1. Клонируйте репозиторий 
 ```
-git clone https://github.com/USERNAME/REPOSITORY.git
+git clone https://github.com/EvySide/DjangoApp.git
 cd DjangoFirstApp
 ```
 
