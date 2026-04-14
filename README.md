@@ -3,7 +3,7 @@
 ### 1. Клонируйте репозиторий 
 ```
 git clone https://github.com/EvySide/DjangoApp.git
-cd DjangoFirstApp
+cd DjangoFirstApp\
 ```
 
 ### 2. Создайте виртуальное окружение и его активируйте
