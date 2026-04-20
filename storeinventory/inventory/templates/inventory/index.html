@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+def index(request):
+    inventory_units = Inventory.objects.filter(is_available=True)  # или все
+    return render(request, 'index.html', {'inventory_units': inventory_units})
+    
 {% block content %}
 <h1 class="page-title">{{ title }}</h1>
 <p class="subhead">Каталог товаров кондитерской</p>
@@ -9,12 +13,10 @@
         {% for p in inventory_units %}
             <div class="product-card">
                 <div class="product-img">
-                    {% if p.quantity > 20 %}
-                        🎂
-                    {% elif p.quantity > 5 %}
-                        🧁
+                    {% if p.image %}
+                        <img src="{{ p.image.url }}" alt="{{ p.name }}" width="470" height="250" style="object-fit: cover;">
                     {% else %}
-                        🍪
+                        <img src="" alt="Нет фото">
                     {% endif %}
                 </div>
 

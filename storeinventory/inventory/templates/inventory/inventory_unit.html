@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
 <div class="product-detail-wrapper">
     <div class="accent-bar"></div>
@@ -9,12 +10,10 @@
             <div class="image-section">
                 <div class="product-img-box">
                     <div class="img-placeholder">
-                        {% if inventory_unit.quantity > 20 %}
-                            🎂
-                        {% elif inventory_unit.quantity > 5 %}
-                            🧁
+                         {% if inventory_unit.image %}
+                            <img src="{{ inventory_unit.image.url }}" alt="{{ inventory_unit.name }}" width="600" height="400" style="object-fit: cover;">
                         {% else %}
-                            🍪
+                            <img src="/static/images/no-image.png" alt="Нет фото">
                         {% endif %}
                         <br>
                         <span style="font-size: 1rem;">{{ inventory_unit.name }}</span>
