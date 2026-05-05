@@ -1,5 +1,7 @@
 from django.urls import path, register_converter
 from django.views.defaults import page_not_found
+from django.conf.urls.static import static
+from django.conf import settings
 
 from . import views
 from . import converters
@@ -15,3 +17,5 @@ urlpatterns = [
     path('tag/<slug:tag_slug>/', views.show_tag_list, name='tag'),
 ]
 
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

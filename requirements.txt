@@ -11,6 +11,7 @@ jedi==0.19.2
 lxml==6.0.2
 matplotlib-inline==0.2.1
 parso==0.8.6
+pillow==12.2.0
 prompt_toolkit==3.0.52
 psycopg[binary]==3.3.3
 psycopg2-binary==2.9.12

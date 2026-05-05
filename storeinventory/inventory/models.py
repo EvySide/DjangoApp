@@ -19,6 +19,8 @@ class Inventory(models.Model):
     class Status(models.IntegerChoices):
         NOT_AVAILABLE = 0, 'Нет в наличии'
         IN_STOCK = 1, 'В наличии'
+    
+    image = models.ImageField(blank=True, upload_to='images')
 
     name = models.CharField(max_length=255, verbose_name='Название')
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='Slug',
