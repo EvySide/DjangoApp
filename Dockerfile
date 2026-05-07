@@ -38,6 +38,12 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     --mount=type=bind,source=requirements.txt,target=requirements.txt \
     python -m pip install -r requirements.txt
 
+# Копируем код сразу с правильным владельцем
+COPY --chown=appuser:appuser . .
+
+# Создаём папку для загружаемых файлов и отдаём её appuser
+RUN mkdir -p /app/images && chown -R appuser:appuser /app/images
+
 # Switch to the non-privileged user to run the application.
 USER appuser
 
